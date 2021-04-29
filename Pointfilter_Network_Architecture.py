@@ -60,7 +60,8 @@ class pointfilter_decoder(nn.Module):
 
         self.bn1 = nn.BatchNorm1d(512)
         self.bn2 = nn.BatchNorm1d(256)
-
+        self.bn3 = nn.BatchNorm1d(3)
+        
         self.dropout_1 = nn.Dropout(0.3)
         self.dropout_2 = nn.Dropout(0.3)
 
@@ -69,7 +70,7 @@ class pointfilter_decoder(nn.Module):
         # x = self.dropout_1(x)
         x = F.relu(self.bn2(self.fc2(x)))
         # x = self.dropout_2(x)
-        x = torch.tanh(self.fc3(x))
+        x = torch.tanh(self.bn3(self.fc3(x)))
 
         return x
 
